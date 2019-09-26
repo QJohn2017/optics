@@ -2,6 +2,7 @@ classdef beam_base
 
     properties (Access = protected, Constant)
         axes_default = {-0.5:0.05:0.5 -0.5:0.05:0.5};
+        function_default = function_base
     end
 
     properties (Access = protected)
@@ -15,7 +16,7 @@ classdef beam_base
         function obj = beam_base(function_root, axes)
 
             if nargin < 1
-                function_root = function_base;
+                function_root = obj.function_default;
             end
 
             if nargin < 2
@@ -29,7 +30,8 @@ classdef beam_base
             
             obj.axes = axes;
             obj.function_root = function_root;
-            obj = obj.SetValues(obj.CalculateValues);
+            values_new = obj.CalculateValues;
+            obj = obj.SetValues(values_new);
 
         end
         
@@ -39,7 +41,8 @@ classdef beam_base
 
         function obj = SetFunction(obj, function_new)
             obj.function_root = function_new;
-            obj = obj.SetValues(obj.CalculateValues);
+            values_new = obj.CalculateValues;
+            obj = obj.SetValues(values_new);
         end
 
         function values = GetValues(obj)
@@ -49,13 +52,13 @@ classdef beam_base
         function axes = GetAxes(obj)
             axes = obj.axes;
         end
-
+        
         function obj = SetAxes(obj, axes)
-            obj.axes = {};
+            obj.axes = {[]};
             obj.axes = axes;
-            obj = obj.SetValues(obj.CalculateValues);
+            values_new = obj.CalculateValues;
+            obj = obj.SetValues(values_new);
         end
-
     end
 
     methods (Access = protected)
@@ -69,8 +72,12 @@ classdef beam_base
             for i = 1:length(local_axes)
                 s(i) = length(local_axes{i});
             end
-
-            values = zeros(s);
+            
+            if length(s) ~= 1
+                values = zeros(s);
+            else
+                values = zeros(1, s);
+            end
 
             count = prod(s);
 
@@ -103,7 +110,7 @@ classdef beam_base
             end
 
         end
-
+                
     end
 
     methods (Access = private)
