@@ -1,7 +1,7 @@
-classdef axes_2D_polar < axes_ND_base
+classdef field_2D_polar < field_ND_base
     
-    methods
-        function obj = axes_2D_polar(resolution, radius)
+    methods (Access = public)
+        function obj = field_2D_polar(resolution, radius)
             
             if nargin < 1
                 resolution = 3;
@@ -14,7 +14,7 @@ classdef axes_2D_polar < axes_ND_base
             scale = [radius 2*pi];
             center = scale/2;
 
-            obj = obj@axes_ND_base(2, resolution, scale, center);
+            obj = obj@field_ND_base(2, resolution, scale, center);
             obj.axes_title = {'r' 'phi'};
             obj.name = '2D polar';
         end

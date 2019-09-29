@@ -1,4 +1,4 @@
-classdef axes_base < model_base
+classdef field_base < model_base
     
     properties (Access = protected)
         grid
@@ -13,7 +13,7 @@ classdef axes_base < model_base
     end
     
     methods (Access = public)
-        function obj = axes_base(resolution, scale, center)
+        function obj = field_base(resolution, scale, center)
             
             if length(resolution) ~= length(scale)
                 error("Length of resolution and scale is not match");
@@ -23,7 +23,7 @@ classdef axes_base < model_base
                 error("Length of resolution and center is not match");
             end
             
-            obj = obj@model_base('axes base', ['[' num2str(resolution) '] x [' num2str(scale) '] x [' num2str(center) ']']);
+            obj = obj@model_base('field base', ['[' num2str(resolution) '] x [' num2str(scale) '] x [' num2str(center) ']']);
             
             obj.resolution = resolution;
             obj.scale = scale;

@@ -1,6 +1,6 @@
-classdef axes_3D_spherical < axes_ND_base
+classdef field_3D_spherical < field_ND_base
     methods
-        function obj = axes_3D_spherical(resolution, radius)
+        function obj = field_3D_spherical(resolution, radius)
 
             if nargin < 1
                 resolution = 3;
@@ -13,7 +13,7 @@ classdef axes_3D_spherical < axes_ND_base
             scale = [radius pi 2*pi];
             center = [radius/2 0 pi];
 
-            obj = obj@axes_ND_base(3, resolution, scale, center);
+            obj = obj@field_ND_base(3, resolution, scale, center);
             obj.axes_title = {'r' 'teta' 'phi'};
             obj.name = '3D spherical';
         end

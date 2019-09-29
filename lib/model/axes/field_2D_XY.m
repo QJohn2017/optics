@@ -1,7 +1,7 @@
-classdef axes_2D_XY < axes_ND_base
+classdef field_2D_XY < field_ND_base
     
     methods (Access = public)
-        function obj = axes_2D_XY(resolution, scale, center)
+        function obj = field_2D_XY(resolution, scale, center)
             
             if nargin < 1
                 resolution = 3;
@@ -15,7 +15,7 @@ classdef axes_2D_XY < axes_ND_base
                 center = 0;
             end 
             
-            obj = obj@axes_ND_base(2, resolution, scale, center);
+            obj = obj@field_ND_base(2, resolution, scale, center);
             obj.axes_title = {'x' 'y'};
             obj.name = '2D cartesian';
         end

@@ -1,11 +1,11 @@
-classdef axes_ND_base < axes_base
+classdef field_ND_base < field_base
 
     properties (Access = protected)
         dimension
     end
     
     methods
-        function obj = axes_ND_base(dimension, resolution, scale, center)
+        function obj = field_ND_base(dimension, resolution, scale, center)
                                    
             if nargin < 2
                 resolution = 3;
@@ -43,9 +43,9 @@ classdef axes_ND_base < axes_base
                 error(['Length of center must be equals ' num2str(dimension)]);
             end
             
-            obj = obj@axes_base(resolution, scale, center);
+            obj = obj@field_base(resolution, scale, center);
             obj.dimension = dimension;
-            obj.name = 'axes ND base';
+            obj.name = 'field ND base';
         end
         
         function dim = getDimension(obj)

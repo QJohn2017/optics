@@ -12,9 +12,9 @@ classdef viewer_base < model_base
         end
         
         function fig = show(obj, model)
-            axes_root = model.getAxes;
-            axes = axes_root.getAxes;
-            dim = axes_root.getDimension;
+            field_root = model.getField;
+            axes = field_root.getAxes;
+            dim = field_root.getDimension;
             switch dim
                 case 1
                     t = axes{1};
@@ -25,7 +25,7 @@ classdef viewer_base < model_base
                     y = axes{2};
                     z = model.getValues.*model.getValues;
                     title_name = model.name;
-                    axis_labels = axes_root.axes_title;
+                    axis_labels = field_root.axes_title;
 
                     fig = obj.show_2D_XY(x,y,z,title_name, axis_labels);
                 case 3

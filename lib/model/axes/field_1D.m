@@ -1,7 +1,7 @@
-classdef axes_1D < axes_ND_base
+classdef field_1D < field_ND_base
     
     methods (Access = public)
-        function obj = axes_1D(resolution, scale, center)
+        function obj = field_1D(resolution, scale, center)
             
             if nargin < 1
                 resolution = 3;
@@ -15,7 +15,7 @@ classdef axes_1D < axes_ND_base
                 center = 0;
             end 
             
-            obj = obj@axes_ND_base(1, resolution, scale, center);     
+            obj = obj@field_ND_base(1, resolution, scale, center);     
             obj.axes_title = {'t'};
             obj.name = '1D';
         end

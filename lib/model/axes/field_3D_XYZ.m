@@ -1,7 +1,7 @@
-classdef axes_3D_XYZ < axes_ND_base
+classdef field_3D_XYZ < field_ND_base
     
     methods (Access = public)
-        function obj = axes_3D_XYZ(resolution, scale, center)
+        function obj = field_3D_XYZ(resolution, scale, center)
             
             if nargin < 1
                 resolution = 3;
@@ -15,7 +15,7 @@ classdef axes_3D_XYZ < axes_ND_base
                 center = 0;
             end 
             
-            obj = obj@axes_ND_base(3, resolution, scale, center);
+            obj = obj@field_ND_base(3, resolution, scale, center);
             obj.axes_title = {'x' 'y', 'z'};
             obj.name = '3D cartesian';
         end

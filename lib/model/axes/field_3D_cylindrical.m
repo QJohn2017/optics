@@ -1,7 +1,7 @@
-classdef axes_3D_cylindrical < axes_ND_base
+classdef field_3D_cylindrical < field_ND_base
 
     methods
-        function obj = axes_3D_cylindrical(resolution, radius, distance)
+        function obj = field_3D_cylindrical(resolution, radius, distance)
             if nargin < 1
                 resolution = 3;
             end
@@ -15,7 +15,7 @@ classdef axes_3D_cylindrical < axes_ND_base
             scale = [radius 2*pi distance];
             center = [radius/2 pi 0];
 
-            obj = obj@axes_ND_base(3, resolution, scale, center);
+            obj = obj@field_ND_base(3, resolution, scale, center);
             obj.axes_title = {'r' 'phi' 'z'};
             obj.name = '3D cylindrical';
         end

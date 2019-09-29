@@ -2,25 +2,25 @@ classdef beam_base < model_base
 
     properties (Access = protected)
         function_root
-        axes_root
+        field_root
         values
     end
     
     methods (Access = public)
 
-        function obj = beam_base(function_root, axes_root)
+        function obj = beam_base(function_root, field_root)
             
             if nargin < 1
                 function_root = function_base;
             end
 
             if nargin < 2
-                axes_root = axes_base;
+                field_root = field_base;
             end
             
-            obj = obj@model_base([function_root.name ' _ ' axes_root.name]);
+            obj = obj@model_base([function_root.name ' _ ' field_root.name]);
 
-            obj.axes_root = axes_root;
+            obj.field_root = field_root;
             obj.function_root = function_root;
             values_new = obj.calculateValues;
             obj = obj.setValues(values_new);
@@ -41,12 +41,12 @@ classdef beam_base < model_base
             values = obj.values;
         end
 
-        function axes = getAxes(obj)
-            axes = obj.axes_root;
+        function field = getField(obj)
+            field = obj.field_root;
         end
         
-        function obj = setAxes(obj, axes)
-            obj.axes_root = axes;
+        function obj = setField(obj, field)
+            obj.field_root = field;
             values_new = obj.calculateValues;
             obj = obj.setValues(values_new);
         end
@@ -54,17 +54,17 @@ classdef beam_base < model_base
 
     methods (Access = protected)
 
-        function values = calculateValues(obj, local_function, local_axes)
+        function values = calculateValues(obj, local_function, local_field)
             
             if nargin < 2
                 local_function = obj.function_root;
             end
             
             if nargin < 3
-                local_axes = obj.axes_root;
+                local_field = obj.field_root;
             end
             
-            res = local_axes.getResolution;
+            res = local_field.getResolution;
             
             count = prod(res);
 
@@ -73,9 +73,7 @@ classdef beam_base < model_base
             for id_coord_curr = 1:count
                 
                 for i = 1:length(coord)
-                    axis = local_axes.getAxes{i};
-                    i;
-                    coord;
+                    axis = local_field.getAxes{i};
                     point(i) = axis(coord(i));
                 end
 
