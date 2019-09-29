@@ -8,31 +8,15 @@ classdef axes_base
         center
     end
     
+    properties (Access = public)
+        axes_title
+    end
+    
     methods (Access = public)
         function obj = axes_base(resolution, scale, center)
-            
-            if nargin < 1
-                resolution = [31 31];
-            end
-            
-            if nargin < 2
-                scale = [1];
-            end
-            
-            if nargin < 3
-                center = [0];
-            end
-            
-            if length(scale) == 1
-                scale = scale * ones(1, length(resolution));
-            end
-            
+
             if length(resolution) ~= length(scale)
                 error("Length of resolution and scale is not match");
-            end
-            
-            if length(center) == 1
-                center = center * ones(1, length(resolution));
             end
             
             if length(resolution) ~= length(center)
@@ -159,7 +143,7 @@ classdef axes_base
             local_resolution = obj.resolution;
             local_scale = obj.scale;
             local_center = obj.center;
-
+            
             axes{length(local_resolution)} = [];
             for i = 1:length(local_resolution)
                 start = -0.5*local_scale(i);
