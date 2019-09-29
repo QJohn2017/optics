@@ -16,6 +16,7 @@ classdef axes_2D_polar < axes_ND_base
 
             obj = obj@axes_ND_base(2, resolution, scale, center);
             obj.axes_title = {'r' 'phi'};
+            obj.name = '2D polar';
         end
 
         function r = getR(obj)

@@ -17,6 +17,7 @@ classdef axes_3D_cylindrical < axes_ND_base
 
             obj = obj@axes_ND_base(3, resolution, scale, center);
             obj.axes_title = {'r' 'phi' 'z'};
+            obj.name = '3D cylindrical';
         end
 
         function r = getR(obj)

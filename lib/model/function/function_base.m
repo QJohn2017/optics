@@ -1,16 +1,9 @@
-classdef function_base
-   
-    properties (Access = public)
-        name
-    end
-    
+classdef function_base < model_base
+       
     methods (Access = public)
 
-        function obj = function_base(name)
-            if nargin < 1
-                name = 'default function';
-            end
-            obj.name = name;
+        function obj = function_base()
+            obj = obj@model_base('default function');
         end
 
     end
@@ -18,7 +11,7 @@ classdef function_base
     methods (Access = public)
 
         function value = calculate(obj, params)
-            if sum(params(1)*ones(size(params))~=params)
+            if sum(params(1)*ones(size(params)) ~= params)
                 value = 0;
             else
                 value = 1;

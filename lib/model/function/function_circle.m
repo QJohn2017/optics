@@ -1,10 +1,5 @@
 classdef function_circle < function_base
-       
-    properties (Access = private)
-        radius_circ_default = 1;
-        center_circ_default = 0;
-    end
-    
+
     properties (Access = public)
         radius_circ
         center_circ
@@ -14,16 +9,21 @@ classdef function_circle < function_base
 
         function obj = function_circle(radius_circ, center_circ)
             if nargin < 1
-                radius_circ = obj.radius_circ_default;
+                radius_circ = 1;
             end
             
             if nargin < 2
-                center_circ = obj.center_circ_default;
+                center_circ = 0;
             end
             
-            if length(radius_circ)~=length(center_circ)
+            if length(radius_circ) ~= length(center_circ)
                 error("Size of scale and size of center is not match!");
             end
+            
+            obj = obj@function_base;
+            
+            obj.name = 'circle';
+            obj.description = ['[' num2str(radius_circ) '] x [' num2str(center_circ) ']'];
             
             obj.radius_circ = radius_circ;
             obj.center_circ = center_circ;

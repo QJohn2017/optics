@@ -18,7 +18,7 @@ classdef beam_base < model_base
                 axes_root = axes_base;
             end
             
-            obj = obj@model_base(function_root.name);
+            obj = obj@model_base([function_root.name ' _ ' axes_root.name]);
 
             obj.axes_root = axes_root;
             obj.function_root = function_root;
@@ -87,8 +87,10 @@ classdef beam_base < model_base
                     coord = obj.getNextCoord(res, coord);
                 end
             end
-            
-            values = reshape(values, res);
+
+            if length(res) > 1
+                values = reshape(values, res);
+            end
             
         end
                 

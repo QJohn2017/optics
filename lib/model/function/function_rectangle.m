@@ -1,10 +1,5 @@
 classdef function_rectangle < function_base
        
-    properties (Access = private)
-        scale_rect_default = 1;
-        center_rect_default = 0;
-    end
-    
     properties (Access = public)
         scale_rect
         center_rect
@@ -14,16 +9,21 @@ classdef function_rectangle < function_base
 
         function obj = function_rectangle(scale_rect, center_rect)
             if nargin < 1
-                scale_rect = obj.scale_rect_default;
+                scale_rect = 1;
             end
             
             if nargin < 2
-                center_rect = obj.center_rect_default;
+                center_rect = 0;
             end
             
             if length(scale_rect)~=length(center_rect)
                 error("Size of scale and size of center is not match!");
             end
+            
+            obj = obj@function_base;
+            
+            obj.name = 'rectangle';
+            obj.description = ['[' num2str(scale_rect) '] x [' num2str(center_rect) ']'];
             
             obj.scale_rect = scale_rect;
             obj.center_rect = center_rect;

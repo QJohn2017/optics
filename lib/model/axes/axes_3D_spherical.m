@@ -15,6 +15,7 @@ classdef axes_3D_spherical < axes_ND_base
 
             obj = obj@axes_ND_base(3, resolution, scale, center);
             obj.axes_title = {'r' 'teta' 'phi'};
+            obj.name = '3D spherical';
         end
 
         function r = getR(obj)

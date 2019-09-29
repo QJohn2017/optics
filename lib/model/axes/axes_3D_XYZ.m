@@ -17,6 +17,7 @@ classdef axes_3D_XYZ < axes_ND_base
             
             obj = obj@axes_ND_base(3, resolution, scale, center);
             obj.axes_title = {'x' 'y', 'z'};
+            obj.name = '3D cartesian';
         end
 
         function x = getX(obj)

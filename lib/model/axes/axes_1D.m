@@ -17,6 +17,7 @@ classdef axes_1D < axes_ND_base
             
             obj = obj@axes_ND_base(1, resolution, scale, center);     
             obj.axes_title = {'t'};
+            obj.name = '1D';
         end
 
         function axis = getAxis(obj)

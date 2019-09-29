@@ -17,6 +17,7 @@ classdef axes_2D_XY < axes_ND_base
             
             obj = obj@axes_ND_base(2, resolution, scale, center);
             obj.axes_title = {'x' 'y'};
+            obj.name = '2D cartesian';
         end
 
         function x = getX(obj)

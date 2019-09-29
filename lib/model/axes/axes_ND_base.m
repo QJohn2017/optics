@@ -45,6 +45,7 @@ classdef axes_ND_base < axes_base
             
             obj = obj@axes_base(resolution, scale, center);
             obj.dimension = dimension;
+            obj.name = 'axes ND base';
         end
         
         function dim = getDimension(obj)
