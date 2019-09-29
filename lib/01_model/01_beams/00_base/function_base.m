@@ -18,7 +18,11 @@ classdef function_base
     methods (Access = public)
 
         function value = calculate(obj, params)
-            value = 0;
+            if sum(params(1)*ones(size(params))~=params)
+                value = 0;
+            else
+                value = 1;
+            end
         end
 
     end
