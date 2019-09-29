@@ -1,4 +1,4 @@
-classdef function_rectangle < function_base
+classdef function_rectangle_ND < function_base
        
     properties (Access = public)
         scale_rect
@@ -7,7 +7,7 @@ classdef function_rectangle < function_base
 
     methods (Access = public)
 
-        function obj = function_rectangle(scale_rect, center_rect)
+        function obj = function_rectangle_ND(scale_rect, center_rect)
             if nargin < 1
                 scale_rect = 1;
             end

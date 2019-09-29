@@ -1,4 +1,4 @@
-classdef function_HermiteGauss < function_base
+classdef function_HermiteGauss_ND < function_base
    
     properties (Access = public)
         coef
@@ -7,7 +7,7 @@ classdef function_HermiteGauss < function_base
     
     methods (Access = public)
 
-        function obj = function_HermiteGauss(coef, epsilon)
+        function obj = function_HermiteGauss_ND(coef, epsilon)
             
             if nargin < 2
                 epsilon = 0.001;
@@ -15,7 +15,7 @@ classdef function_HermiteGauss < function_base
             
             obj = obj@function_base;
             
-            obj.name = 'Hermite Gauss';
+            obj.name = 'Hermite Gauss (cartesian)';
             obj.description = ['[' num2str(coef) ']'];
             
             obj.coef = coef;

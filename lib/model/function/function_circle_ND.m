@@ -1,4 +1,4 @@
-classdef function_circle < function_base
+classdef function_circle_ND < function_base
 
     properties (Access = public)
         radius_circ
@@ -7,7 +7,7 @@ classdef function_circle < function_base
 
     methods (Access = public)
 
-        function obj = function_circle(radius_circ, center_circ)
+        function obj = function_circle_ND(radius_circ, center_circ)
             if nargin < 1
                 radius_circ = 1;
             end
