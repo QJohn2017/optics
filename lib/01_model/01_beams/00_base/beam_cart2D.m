@@ -30,31 +30,31 @@ classdef beam_cart2D < beam_cart
             
         end
         
-        function x = GetX(obj)
+        function x = getX(obj)
             x = obj.axes{1};
         end
         
-        function y = GetY(obj)
+        function y = getY(obj)
             y = obj.axes{2};
         end
         
-        function obj = SetX(obj, x)
+        function obj = setX(obj, x)
             axes = obj.axes;
             axes{1} = x;
             obj = obj.SetAxes(axes);
         end
         
-        function obj = SetY(obj, y)
+        function obj = setY(obj, y)
             axes = obj.axes;
             axes{2} = y;
             obj = obj.SetAxes(axes);
         end
         
-        function obj = SetAxes(obj, axes)
+        function obj = setAxes(obj, axes)
             if length(axes) ~= 2
                 error("Size of axes is not equals two!");
             end
-            obj = SetAxes@beam_base(obj, axes);
+            obj = setAxes@beam_base(obj, axes);
         end
         
     end

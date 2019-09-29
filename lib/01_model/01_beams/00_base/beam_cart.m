@@ -45,7 +45,7 @@ classdef beam_cart < beam_base
     
     methods (Access = protected)
         
-        function axes = CalculateAxes(obj, resolution, scale)
+        function axes = calculateAxes(obj, resolution, scale)
             if length(resolution) ~= length(scale)
                 error("Length of resolution and length of scale is not match!");
             end
