@@ -27,6 +27,17 @@ classdef field_2D_XY < field_ND_base
         function y = getY(obj)
             y = obj.getAxes{2};
         end
+        
+        function field = getField_2D_polar(obj)
+            local_resolution = obj.resolution;
+            local_scale = obj.scale;
+            local_center = obj.center;
+            
+            resolution = fix(sqrt(prod(local_resolution)));
+            radius = sqrt(sum(local_scale.*local_scale))/2 + sqrt(sum(local_center.*local_center));
+            
+            field = field_2D_polar(resolution, radius);
+        end
     end
 end
 
