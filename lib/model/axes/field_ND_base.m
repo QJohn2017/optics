@@ -45,11 +45,52 @@ classdef field_ND_base < field_base
             
             obj = obj@field_base(resolution, scale, center);
             obj.dimension = dimension;
-            obj.name = 'field ND base';
+            obj.name = ['field ' num2str(dimension) 'D'];
         end
         
         function dim = getDimension(obj)
             dim = obj.dimension;
+        end
+        
+        function [res, mes] = checkEquals(obj, field)
+            
+            res = false;
+            
+            left_dim = obj.getDimension;
+            right_dim = field.getDimension;
+            
+            if left_dim ~= right_dim
+                mes = 'Dimensions of beams are not match';
+                return;
+            end
+            
+            left_res = obj.getResolution;
+            right_res = field.getResolution;
+            
+            if sum(left_res ~= right_res)
+                mes = 'Sizes of resolution of beams are not match';
+                return;
+            end
+            
+            left_sca = obj.getScale;
+            right_sca = field.getScale;
+            
+            if sum(left_sca ~= right_sca)
+                mes = 'Sizes of scale of beams are not match';
+                return;
+            end
+            
+            left_cen = obj.getCenter;
+            right_cen = field.getCenter;
+            
+            if sum(left_cen~=right_cen)
+                mes = 'Sizes of center of beams are not match';
+                return;
+            end
+            
+            res = true;
+            mes = 'Good';
+            
         end
     end
 end

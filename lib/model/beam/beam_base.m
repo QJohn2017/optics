@@ -50,12 +50,63 @@ classdef beam_base < model_base
             values_new = obj.calculateValues;
             obj = obj.setValues(values_new);
         end
+        
+        function resultBeam = plus(obj, beam)
+            
+            local_field = obj.getField;
+            beam_field = beam.getField;
+            
+            [res, mes] = local_field.checkEquals(beam_field);
+            
+            if ~res
+                error(mes);
+            end
+            
+            local_dim = local_field.getDimension;
+            local_res = local_field.getResolution;
+            local_sca = local_field.getScale;
+            local_cen = local_field.getCenter;
+            
+            local_values = obj.getValues;
+            beam_values = beam.getValues;
+            
+            field = field_ND_base(local_dim, local_res, local_sca, local_cen);
+            fu = function_custom(local_values + beam_values, field);
+            
+            resultBeam = beam_base(fu, field);
+            
+        end
+        
+        function resultBeam = minus(obj, beam)
+            local_field = obj.getField;
+            beam_field = beam.getField;
+            
+            [res, mes] = local_field.checkEquals(beam_field);
+            
+            if ~res
+                error(mes);
+            end
+            
+            local_dim = local_field.getDimension;
+            local_res = local_field.getResolution;
+            local_sca = local_field.getScale;
+            local_cen = local_field.getCenter;
+            
+            local_values = obj.getValues;
+            beam_values = beam.getValues;
+            
+            field = field_ND_base(local_dim, local_res, local_sca, local_cen);
+            fu = function_custom(local_values - beam_values, field);
+            
+            resultBeam = beam_base(fu, field);
+        end
+
     end
 
     methods (Access = protected)
 
         function values = calculateValues(obj, local_function, local_field)
-            
+
             if nargin < 2
                 local_function = obj.function_root;
             end

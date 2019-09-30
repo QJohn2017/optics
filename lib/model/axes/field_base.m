@@ -15,6 +15,18 @@ classdef field_base < model_base
     methods (Access = public)
         function obj = field_base(resolution, scale, center)
             
+            if nargin < 1 
+                resolution = 1;
+            end
+            
+            if nargin < 2 
+                scale = 0;
+            end
+            
+            if nargin < 3
+                center = 0;
+            end
+            
             if length(resolution) ~= length(scale)
                 error("Length of resolution and scale is not match");
             end
@@ -149,7 +161,11 @@ classdef field_base < model_base
             axes{length(local_resolution)} = [];
             for i = 1:length(local_resolution)
                 start = -0.5*local_scale(i);
-                step = local_scale(i)/(local_resolution(i)-1);
+                n = local_resolution(i);
+                if n < 2
+                    n = 2;
+                end
+                step = local_scale(i)/(n-1);
                 axis = [];
                 for j = 1:local_resolution(i)
                     axis(j) = start + (j-1)*step;
