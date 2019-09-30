@@ -42,7 +42,30 @@ classdef function_custom < function_base
             value = obj.getValue(local_values, coord);
             
         end
+        
+        function field = getField(obj)
+            field = obj.field;
+        end
 
+        function obj = setField(obj, field)
+            local_field = obj.field;
+            
+            local_res = local_field.getResolution;
+            field_res = field.getResolution;
+            
+            if length(local_res) ~= length(field_res)
+                warning("Resolution of new field is not valid. Setting did not happen");
+                return;
+            end
+            
+            if sum(local_res ~= field_res)
+                warning("Resolution of new field is not valid. Setting did not happen");
+                return;
+            end
+            
+            obj.field = field;
+        end
+        
     end
     
     methods (Access = protected)

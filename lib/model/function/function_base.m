@@ -17,7 +17,11 @@ classdef function_base < model_base
                 value = 1;
             end
         end
-
+        
+        %function value = subsref(obj, params)
+        %    value = obj.calculate(params.subs{1});
+        %end
+        
     end
 
 end
