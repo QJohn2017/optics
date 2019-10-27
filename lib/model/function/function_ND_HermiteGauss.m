@@ -1,13 +1,13 @@
-classdef function_HermiteGauss_ND < function_base
+classdef function_ND_HermiteGauss < function_base
    
-    properties (Access = public)
+    properties (Access = protected)
         coef
         epsilon
     end
     
     methods (Access = public)
 
-        function obj = function_HermiteGauss_ND(coef, epsilon)
+        function obj = function_ND_HermiteGauss(coef, epsilon)
             
             if nargin < 2
                 epsilon = 0.001;
@@ -20,20 +20,29 @@ classdef function_HermiteGauss_ND < function_base
             
             obj.coef = coef;
             obj.epsilon = epsilon;
+            
+            obj.func = @(p) obj.hermiteGauss(p, obj.coef, obj.epsilon);
         end
 
     end
 
     methods (Access = public)
+        function coef = getCoef(obj)
+            coef = obj.coef;
+        end
+        function eps = getEpsilon(obj)
+            eps = obj.epsilon;
+        end
+    end
+    
+    methods (Access = protected)
 
-        function value = calculate(obj, params)
-            local_coef = obj.coef;
+        function value = hermiteGauss(obj, params, local_coef, local_epsilon)
             
             if length(local_coef) == 1
                 local_coef = local_coef * ones(size(params));
             end
             
-            local_epsilon = obj.epsilon;
             if length(params)~=length(local_coef)
                 error("Length of point and length of coef is not match")
             end

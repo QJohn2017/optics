@@ -18,12 +18,13 @@ classdef viewer_base < model_base
             switch dim
                 case 1
                     t = axes{1};
-                    v = model.getValues.*model.getValues;
+                    v = model.getIntensity;
                     fig = plot(t,v);
                 case 2
                     x = axes{1};
                     y = axes{2};
-                    z = model.getValues.*model.getValues;
+                    z = model.getIntensity;
+                    %z = model.getPhase;
                     title_name = model.name;
                     axis_labels = field_root.axes_title;
 
@@ -32,7 +33,7 @@ classdef viewer_base < model_base
                     x = axes{1};
                     y = axes{2};
                     z = axes{3};
-                    v = model.getValues.*model.getValues;
+                    v = model.getIntensity;
                     title_name = model.name;
                     
                     fig = obj.show_3D_XYZ(x,y,z,v,title_name);

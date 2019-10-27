@@ -26,13 +26,15 @@ classdef function_values < function_base
             
             obj.values = values;
             obj.field = field;
+            
+            obj.func = @(x) obj.calculateValue(x);
         end
 
     end
     
     methods (Access = public)
 
-        function value = calculate(obj, point)
+        function value = calculateValue(obj, point)
 
             local_values = obj.values;
             local_field = obj.field;

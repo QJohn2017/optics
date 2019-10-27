@@ -1,13 +1,13 @@
-classdef function_circle_ND < function_base
+classdef function_ND_circle < function_base
 
-    properties (Access = public)
+    properties (Access = protected)
         radius_circ
         center_circ
     end
 
     methods (Access = public)
 
-        function obj = function_circle_ND(radius_circ, center_circ)
+        function obj = function_ND_circle(radius_circ, center_circ)
             if nargin < 1
                 radius_circ = 1;
             end
@@ -27,24 +27,32 @@ classdef function_circle_ND < function_base
             
             obj.radius_circ = radius_circ;
             obj.center_circ = center_circ;
+            
+            obj.func = @(v) obj.circle(v, obj.radius_circ, obj.center_circ);
         end
 
     end
 
     methods (Access = public)
+        function radius = getRadius(obj)
+            radius = obj.radius_circ;
+        end
+        function center = getCenter(obj)
+            center = obj.center_circ;
+        end
+    end
+    
+    methods (Access = protected)
 
-        function value = calculate(obj, point)
+        function value = circle(obj, point, radius, center)
 
-            local_radius_circ = obj.radius_circ;
-            local_center_circ = obj.center_circ;
-            
-            if length(local_center_circ) == 1
-                local_center_circ = local_center_circ * ones(size(point));
-            elseif sum(size(local_center_circ) ~= size(point))
+            if length(center) == 1
+                center = center * ones(size(point));
+            elseif sum(size(center) ~= size(point))
                 error("Size of center circle and size of point is not match!");
             end
-            point = point - local_center_circ;
-            if sum(point.*point)<=local_radius_circ
+            point = point - center;
+            if sum(point.*point)<=radius
                 value = 1;
             else
                 value = 0;

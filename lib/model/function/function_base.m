@@ -1,11 +1,18 @@
 classdef function_base < model_base
     
-    
+    properties (Access = public)
+        func
+    end
     
     methods (Access = public)
 
-        function obj = function_base()
+        function obj = function_base(func)
+            if nargin < 1
+                func = @(t) 0;
+            end
             obj = obj@model_base('default function');
+            
+            obj.func = func;
         end
 
     end
@@ -13,21 +20,48 @@ classdef function_base < model_base
     methods (Access = public)
 
         function value = calculate(obj, params)
-            if sum(params(1)*ones(size(params)) ~= params)
-                value = 0;
-            else
-                value = 1;
-            end
+            value = obj.func(params);
         end
         
-        function func = plus(obj1, obj2)
-            func = function_combo({obj1 obj2});
+        function values = valuesOnField(obj, field)
+            values = 0;
         end
         
-        function func = times(obj, value)
-            
+        function res = uminus(obj)
+            res = obj.*(-1);
         end
         
+        function res = plus(left, right)
+            res = function_base(@(v) left.func(v)+right.func(v));
+        end
+        
+        function res = minus(left, right)
+            res = left+(-right);
+        end
+        
+        function res = times(obj, value)
+            res = function_base(@(v) value*obj.func(v));
+        end
+        
+        function res = mtimes(left, right)
+            res = function_base(@(v) left.func(v)*right.func(v));
+        end
+                
+        function res = rdivide(obj, value)
+            res = obj.*(1/value);
+        end
+        
+        function res = mrdivide(left, right)
+            res = function_base(@(v) left.func(v)/right.func(v));
+        end
+
+        function res = power(obj, value)
+            res = function_base(@(v) obj.func(v)^value);
+        end
+        
+        function res = mpower(left, right)
+            res = function_base(@(v) left.func(v)^right.func(v));
+        end
     end
 
 end

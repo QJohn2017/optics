@@ -100,7 +100,40 @@ classdef beam_base < model_base
             
             resultBeam = beam_base(fu, field);
         end
-
+        
+        function mag = getMagnitude(obj)
+            mag = abs(obj.values);
+        end
+        
+        function int = getIntensity(obj)
+            int = obj.getMagnitude^2;
+        end
+        
+        function res = getMaxMag(obj, matrix)
+            if nargin < 2
+                res = obj.getMaxMag(getMagnitude);
+            else
+                
+                if length(matrix) > 1
+                    res = obj.getMaxMag(max(matrix));
+                else
+                    res = matrix;
+                end
+            end
+        end
+        
+        function res = getMaxInt(obj)
+            res = obj.getMaxMag^2;
+        end
+        
+        function res = getPhase(obj)
+            res = angle(obj.values);
+        end
+        
+        function res = getGradientPhase(obj)
+            res = abs(obj.getPhase);
+        end
+        
     end
 
     methods (Access = protected)
