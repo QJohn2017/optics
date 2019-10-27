@@ -27,7 +27,7 @@ classdef viewer_base < model_base
                     title_name = model.name;
                     axis_labels = field_root.axes_title;
 
-                    fig = obj.show_2D_XY(x,y,z,title_name, axis_labels);
+                    fig = obj.show_2D_XY(x,y,z',title_name, axis_labels);
                 case 3
                     x = axes{1};
                     y = axes{2};

@@ -1,5 +1,7 @@
 classdef function_base < model_base
-       
+    
+    
+    
     methods (Access = public)
 
         function obj = function_base()
@@ -18,9 +20,13 @@ classdef function_base < model_base
             end
         end
         
-        %function value = subsref(obj, params)
-        %    value = obj.calculate(params.subs{1});
-        %end
+        function func = plus(obj1, obj2)
+            func = function_combo({obj1 obj2});
+        end
+        
+        function func = times(obj, value)
+            
+        end
         
     end
 

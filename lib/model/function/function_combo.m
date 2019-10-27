@@ -5,7 +5,7 @@ classdef function_combo < function_base
     end
     
     methods (Access = public)
-        function obj = function_combo(functions)
+        function obj = function_combo(units)
             if nargin < 1
                 units = {};
             end
@@ -14,7 +14,7 @@ classdef function_combo < function_base
             
             obj.name = 'combo';
             des = '[';
-            for i = 1:length(unis)
+            for i = 1:length(units)
                 unit = units{i};
                 des = [des ', '  unit.name];
             end
@@ -29,7 +29,12 @@ classdef function_combo < function_base
 
         function value = calculate(obj, point)
 
-            %
+            local_units = obj.units;
+            
+            value = 0;
+            for i = 1:length(local_units)
+                value = value + local_units{i}.calculate(point);
+            end
 
         end
 

@@ -1,31 +1,21 @@
 classdef function_custom < function_base
    
     properties (Access = protected)
-        values
-        field
+        aFunc
     end
     
     methods (Access = public)
         
-        function obj = function_custom(values, field)
+        function obj = function_custom(aFunc)
             obj = obj@function_base;
             obj.name = 'custom function';
             
-            size_values = size(values);
-            
-            axes = field.getAxes;
-            
-            size_field(length(axes)) = 0;
-            for i = 1:length(axes)
-                size_field(i) = length(axes{i});
-            end
 
-            if sum(size_values ~= size_field)
-                error("Size of values and size of field is not match");
+            if nargin < 1
+                aFunc = @(t) (0);
             end
             
-            obj.values = values;
-            obj.field = field;
+            obj.aFunc = aFunc;
         end
 
     end
@@ -34,63 +24,18 @@ classdef function_custom < function_base
 
         function value = calculate(obj, point)
 
-            local_values = obj.values;
-            local_field = obj.field;
-            
-            coord = local_field.findPoint(point);
-            
-            value = obj.getValue(local_values, coord);
+            value = obj.aFunc(point);
             
         end
         
-        function field = getField(obj)
-            field = obj.field;
-        end
-
-        function obj = setField(obj, field)
-            local_field = obj.field;
-            
-            local_res = local_field.getResolution;
-            field_res = field.getResolution;
-            
-            if length(local_res) ~= length(field_res)
-                warning("Resolution of new field is not valid. Setting did not happen");
-                return;
-            end
-            
-            if sum(local_res ~= field_res)
-                warning("Resolution of new field is not valid. Setting did not happen");
-                return;
-            end
-            
-            obj.field = field;
+        function func = GetFunc(obj)
+            func = obj.aFuncl;
         end
         
-    end
-    
-    methods (Access = protected)
-
-        function value = getValue(obj, values, coord)
-            
-            size_values = size(values);
-            
-            if length(coord) > 1
-                
-                if length(coord) == 2
-                    values = values(coord(1),:);
-                else
-                    values = reshape(values(coord(1),:), size_values(2:end));
-                end
-                
-                value = obj.getValue(values, coord(2:end));
-            else
-                
-                value = values(coord);
-
-            end
-
+        function obj = SetFunc(obj, aFunc)
+            obj.aFunc = aFunc;
         end
-
+        
     end
 end
 

@@ -3,6 +3,7 @@ classdef function_rectangle_ND < function_base
     properties (Access = public)
         scale_rect
         center_rect
+        func
     end
 
     methods (Access = public)
@@ -27,6 +28,8 @@ classdef function_rectangle_ND < function_base
             
             obj.scale_rect = scale_rect;
             obj.center_rect = center_rect;
+            
+            obj.func = @(p) obj.rectangle(p, obj.scale_rect, obj.center_rect);
         end
 
     end
@@ -49,15 +52,21 @@ classdef function_rectangle_ND < function_base
             elseif sum(size(local_center_rect) ~= size(point))
                 error("Size of center rect and size of point is not match!");
             end
+            
+            value = obj.rectangle(point, local_scale_rect,local_center_rect);
 
-            if prod(abs(point-local_center_rect) <= local_scale_rect / 2) 
+        end
+
+    end
+    
+    methods (Access = protected)
+        function value = rectangle(obj, point, scale, center)
+            if prod(abs(point-center) <= scale / 2) 
                 value = 1;
             else
                 value = 0;
             end
-
         end
-
     end
 
 end
