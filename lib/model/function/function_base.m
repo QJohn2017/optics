@@ -23,7 +23,7 @@ classdef function_base < model_base
             value = obj.func(params);
         end
         
-        function values = valuesOnField(obj, field)
+        function values = getValuesOn(obj, field)
             res = field.getResolution;
             axes = field.getAxes;
             count = prod(res);
