@@ -24,7 +24,31 @@ classdef function_base < model_base
         end
         
         function values = valuesOnField(obj, field)
-            values = 0;
+            res = field.getResolution;
+            axes = field.getAxes;
+            count = prod(res);
+
+            coord = ones(1, length(res));
+            point = zeros(1, length(res));
+            for id_coord_curr = 1:count
+                
+                for i = 1:length(coord)
+                    axis = axes{i};
+                    point(i) = axis(coord(i));
+                end
+
+                value = obj.calculate(point);
+
+                values(id_coord_curr) = value;
+                
+                if id_coord_curr ~= count
+                    coord = obj.getNextCoord(res, coord);
+                end
+            end
+
+            if length(res) > 1
+                values = reshape(values, res);
+            end
         end
         
         function res = uminus(obj)
@@ -61,6 +85,39 @@ classdef function_base < model_base
         
         function res = mpower(left, right)
             res = function_base(@(v) left.func(v)^right.func(v));
+        end
+    end
+    
+        methods (Access = private)
+        function coordRes = getNextCoord(obj, resolution, coord)
+            coord(1) = coord(1) + 1;
+            coordRes = obj.getNormCoord(resolution, coord);
+        end
+        
+        function coordNorm = getNormCoord(obj, resolution, coord)
+            [isGood, indexBad] = obj.isGoodCoord(resolution, coord);
+            if isGood
+                coordNorm = coord;
+            else
+                coord(indexBad) = 1;
+                if length(coord) > indexBad
+                    coord(indexBad+1) = coord(indexBad+1) + 1;
+                end
+                if length(coord) == indexBad
+                    error("THE END");
+                end
+                coordNorm = obj.getNormCoord(resolution, coord);
+            end
+        end
+        
+        function [isGood, indexBad] = isGoodCoord(obj, resolution, coord)
+            isGood = true;
+            for indexBad = 1:length(resolution)
+                if coord(indexBad) > resolution(indexBad)
+                    isGood = false;
+                    break;
+                end
+            end
         end
     end
 
