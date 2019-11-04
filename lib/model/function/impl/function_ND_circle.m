@@ -52,7 +52,7 @@ classdef function_ND_circle < function_base
                 error("Size of center circle and size of point is not match!");
             end
             point = point - center;
-            if sum(point.*point)<=radius
+            if sum(point.*point) <= radius
                 value = 1;
             else
                 value = 0;

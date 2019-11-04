@@ -31,24 +31,12 @@ classdef beam_base < model_base
             fun = obj.function_root;
         end
 
-        function obj = setFunction(obj, function_new)
-            obj.function_root = function_new;
-            values_new = obj.calculateValues;
-            obj = obj.setValues(values_new);
-        end
-
         function values = getValues(obj)
             values = obj.values;
         end
 
         function field = getField(obj)
             field = obj.field_root;
-        end
-        
-        function obj = setField(obj, field)
-            obj.field_root = field;
-            values_new = obj.calculateValues;
-            obj = obj.setValues(values_new);
         end
         
         function resultBeam = plus(obj, beam)
