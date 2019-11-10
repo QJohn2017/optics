@@ -8,8 +8,12 @@ function [ output_args ] = make_gif( file_name, names_cell, delay_time )
         make_gif_beams(file_name);
     else
 
+        mkdir(file_name);
+        
         for i = 1:length(names_cell)
-            image_cell{i} = rgb2gray( imread([names_cell{i} '.png']) );
+            nameFile = [names_cell{i} '.png'];
+            image_cell{i} = rgb2gray( imread(nameFile) );
+            movefile(nameFile, file_name);
         end
 
         timeSec = length(names_cell)*delay_time;

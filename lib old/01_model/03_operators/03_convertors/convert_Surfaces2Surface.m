@@ -1,4 +1,4 @@
-function [ result ] = operator_SummaSurfaces( surfaces , array_C )
+function [ result ] = convert_SummaSurfaces( surfaces , array_C )
 
     if nargin < 2
         array_C = ones(1,length(surfaces));

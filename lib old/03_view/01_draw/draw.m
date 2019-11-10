@@ -15,5 +15,5 @@ function draw_one( figure_input, file_name )
     %saveas(figure_input,file_name,'png');
     print(figure_input, file_name, '-dpng');
     close(figure_input);
-
+    
 end

@@ -1,4 +1,4 @@
-function [ result ] = operator_Surface2Beam( surface_data, axes, value )
+function [ result ] = convert_Surface2Beam( surface_data, axes, value )
     
     if nargin < 3
         value = 0;
